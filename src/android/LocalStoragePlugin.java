@@ -37,17 +37,17 @@ public class LocalStoragePlugin extends CordovaPlugin {
   @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
 
-      CordovaActivity activity = ((CordovaActivity)context.getApplicationContext()).getCurrentActivity()
+      CordovaActivity activity = ((CordovaActivity)context.getApplicationContext()).getCurrentActivity();
       CordovaWebView defaultWebView = (CordovaWebView) activity.makeWebView();
 
       cbContext = callbackContext;
 
         try {
-          String jsForLocalStorage = '
+          String jsForLocalStorage = "
           var items = [];
           for (var i = 0; i < localStorage.length; i++){
             items.push({key: localStorage.key(i), value: localStorage.getItem( localStorage.key(i) )});
-          }';
+          }";
           String jsCallback = 'JSInterface.passBackValues(items);';
 
           if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
